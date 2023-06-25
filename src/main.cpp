@@ -1,7 +1,7 @@
 #include <SDL.h>
 #include <iostream>
 #include <SDL_vulkan.h>
-#include <boxer.h>
+#include <boxer/boxer.h>
 
 int main(){
 
