@@ -1,6 +1,7 @@
 #include <SDL.h>
 #include <iostream>
 #include <SDL_vulkan.h>
+#include <boxer.h>
 
 int main(){
 
@@ -23,7 +24,7 @@ int main(){
     }*/
 
     if (SDL_Vulkan_LoadLibrary(nullptr) != 0) {
-        std::cerr << "Error: Failed to load Vulkan library: " << SDL_GetError() << std::endl;
+        boxer::show("Error: Failed to load Vulkan library", "Vulkan-Errors", boxer::Style::Warning);
         SDL_DestroyWindow(Game);
         SDL_Quit();
         return 1;
