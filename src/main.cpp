@@ -1,7 +1,6 @@
 #include <SDL.h>
 #include <iostream>
-#include <vulkan/vulkan.h>
-
+#include <SDL_vulkan.h>
 
 int main(){
 
@@ -23,15 +22,10 @@ int main(){
         return 1;
     }*/
 
-    VkInstance instance;
-    VkInstanceCreateInfo createInfo{};
-    createInfo.sType = VK_STRUCTURE_TYPE_INSTANCE_CREATE_INFO;
-    if (vkCreateInstance(&createInfo, nullptr, &instance) != VK_SUCCESS) {
-        std::cerr << "Error: Failed to create Vulkan instance" << std::endl;
+    if (SDL_Vulkan_LoadLibrary(nullptr) != 0) {
+        std::cerr << "Error: Failed to load Vulkan library: " << SDL_GetError() << std::endl;
         SDL_DestroyWindow(Game);
         SDL_Quit();
         return 1;
     }
-
-    return 0;
 }
