@@ -38,3 +38,28 @@ jobs:
       with:
         name: MyArtifact
         path: ${{github.workspace}}/build
+  Windows-Mingw-Build:
+    runs-on: windows-latest
+
+    steps:
+    - uses: actions/checkout@v3
+
+    - name: Update Git submodules
+      run: git submodule update --init --recursive
+
+    - name: Configure CMake
+
+      run: cmake -B D:\a\Eat-the-Mushroom\Eat-the-Mushroom/build -DCMAKE_BUILD_TYPE=Release -DBUILD_SHARED_LIBS=FALSE -DCMAKE_C_COMPILER=C:/ProgramData/chocolatey/bin/gcc.exe -DCMAKE_CXX_COMPILER=C:/ProgramData/chocolatey/bin/g++.exe -G "Ninja"
+
+    - name: Build
+      run: cmake --build D:\a\Eat-the-Mushroom\Eat-the-Mushroom/build --config Release
+    
+    - name: Test
+      run: |
+        echo "Test Coming Soon..."
+
+    - name: Create Artifact
+      uses: actions/upload-artifact@v2
+      with:
+        name: Windows-Mingw
+        path: ${{ github.workspace }}/build
